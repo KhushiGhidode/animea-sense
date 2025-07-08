@@ -15,7 +15,7 @@ plt.title('count of Result')
 plt.show()
 from sklearn.utils import resample
 majorclass = df[df['Result'] == 0]
-majorclass = df[df['Result'] == 1]
+minorclass = df[df['Result'] == 1]
 major_downsample = resample(majorclass, replace=False, n_samples=len(minorclass) ,random_state=42)
 df=pd.concat([major_downsample, minorclass])
 print(df['Result'].value_counts())
@@ -27,28 +27,28 @@ plt.title('count of Result (Balanced)')
 plt.show()
 df.describe()
 output = df['Gender'].value_counts()
-output.plot(lind = 'bar', color=['orange', 'green'])
+output.plot(kind = 'bar', color=['orange', 'green'])
 plt.xlabel('Gender')
 plt.ylabel('frequency')
 plt.title('Gender count')
 plt.show()
-sns.displot(df['Homoglobin'], kde = True)
+sns.displot(df['Hemoglobin'], kde =True)
 plt.figure(figsize=(6,6))
-ax= sns.barplot(y= df['Homoglobin'],x = df['gender'],hue = df['Result'],ci =None)
+ax= sns.barplot(y= df['Hemoglobin'],x = df['Gender'],hue = df['Result'],ci =None)
 ax.set(xlabel=['male','female'])
 ax.bar_label(ax.containers[0])
 ax.bar_label(ax.containers[1])
 plt.title("Mean Hemoglobin by Gender and Result")
 plt.show()
 sns.pairplot(df)
-sns.heatmap(df.corr(),annot=True,cmap='RdY16A',linewidths=0.2)
-fig=plt.get()
+sns.heatmap(df.corr(),annot=True,cmap='RdYlGn',linewidths=0.2)
+fig=plt.gcf()
 fig.set_size_inches(10,8)
 plt.show()
 Y = df['Result']
 Y
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=20)
+x_train, x_test, y_train, y_test = train_test_split(X, Y ,test_size=0.2, random_state=20)
 print(x_train.shape)
 print(x_test.shape)
 print(y_train.shape)
@@ -95,7 +95,7 @@ elif prediction[0] ==1:
      print ("you have Anemia Disease")
 model = pd.DataFrame({'Model':['linear regression','Decision tree Classifier', 'RandomForest classifier',
                                'Gaussian navie Bayes','Support vector Classifier','Gradient Boost classifier'],
-                      'Score':[acc_lr,acc_dt,acc_rf,ac_nb,acc_svl,acc_gbc],
+                      'Score':[acc_lr,acc_dt,acc_rf,acc_nb,acc_svc,acc_gbc],
                      })
 model
 import pickle
